@@ -1,0 +1,10 @@
+/data
+/etc
+/include
+/Lib
+/Scripts
+/share
+pyvenv.cfg
+/src/__pycache__
+/.vscode
+/graph/graph.html
