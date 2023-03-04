@@ -1,5 +1,6 @@
 import polars as pl
 import datetime
+# from functools import lru_cache
 
 FILE_PATH = "./data/Stocks/"
 
@@ -9,6 +10,7 @@ class AllCalcualtions:
 
     emptyDataFram = pl.DataFrame()
 
+    # @lru_cache
     def calculate_individual_trading_volumn(stockFile):
         """"""
 
@@ -38,6 +40,7 @@ class AllCalcualtions:
 
         return tradingVolume
 
+    # @lru_cache
     def calculate_average_trading_volume(tradingVolume):
         """"""
 
@@ -49,17 +52,14 @@ class AllCalcualtions:
                 .alias("Average Trading Volume"),
             ]
         )
-        
+
         return tradingVolume
 
     def calculate_non_investment_grade(tradingVolume):
         """"""
 
         lastSixtyDays = tradingVolume.filter(
-            [
-                pl.col("*"),
-                pl.col("*").filter(pl.col("Date") >= datetime.date(2017, 10, 8)),
-            ]
+            pl.col("Date") >= datetime.date(2017, 10, 8)
         )
 
         return lastSixtyDays
